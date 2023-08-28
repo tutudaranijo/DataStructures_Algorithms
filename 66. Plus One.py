@@ -13,4 +13,4 @@ class Solution:
                 digits.append(1)
                 one = 0
             i += 1  # increment index
-        return digits[::1]
+        return digits[::-1]
