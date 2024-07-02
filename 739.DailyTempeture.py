@@ -1,20 +1,17 @@
+
 class Solution:
     def dailyTemperatures(self, temperatures: list[int]) -> list[int]:
-        answer=[]
-        temp = 0
-        nexttemp =1
-        res =0
-        while temp < len(temperatures) or   nexttemp < len(temperatures):
+        res = [0] * len(temperatures)
 
-            if temperatures[temp] < temperatures[nexttemp] :
-                nexttemp +=1
-                res +=1
-            else:
-                answer.append(res)
-                temp += 1
-                nexttemp = temp +1
-                res=0
-        return answer
+        stack=[] # pair: [temp , temp]
+
+        for i , t in enumerate(temperatures):
+            while stack and t > stack[-1][0]:
+                stackT, stackInd = stack.pop()
+                res[stackInd ] = (i - stackInd)
+            stack.append([t,i])
+        return res
+
     
 temperatures = [73,74,75,71,69,72,76,73]
 test=Solution().dailyTemperatures(temperatures)
